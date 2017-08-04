@@ -1,0 +1,20 @@
+{
+  "name": "js-blog",
+  "version": "1.0.0",
+  "description": "jsBlog",
+  "main": "index.js",
+  "scripts": {
+    "start-backend": "node ./backend/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macniel/jsBlog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macniel/jsBlog/issues"
+  },
+  "homepage": "https://github.com/macniel/jsBlog#readme"
+}
