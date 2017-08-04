@@ -2,7 +2,10 @@ import * as Model from './models.js';
 
 var app = require('express')();
 var ws = require('express-ws')(app);
+var bodyParser = require('body-parser');
 
+// parse application/json
+app.use(bodyParser.json());
 
 /**
  * translate the given tag from id to a name
@@ -11,6 +14,21 @@ var ws = require('express-ws')(app);
 const translateTag = (tagId) => {
 
 }
+
+app.post('/login', (req, res) => {
+    if ( !req.body ) {
+        res.status(400).end();
+    } else {
+        const username = req.body.username;
+        const password = req.body.password;
+
+        // returns a jwt with userhash for further authentification
+    }
+});
+
+app.get('/logout', (req, res) => {
+
+});
 
 /**
  * get the blog with all references
@@ -33,6 +51,33 @@ app.get('/blog/entries/', (req, res) => {
     const offset = req.query['offset'];
     const limit = req.query['limit'];
     res.send(blog.entries).end();
+});
+
+/**
+ * handler for writing a new blog entry
+ */
+
+writeNewBlogEntry = (req, res) => {
+
+}
+
+/**
+ * write a new blog entry
+ */
+app.post('/blog/entries/', (req, res) => {
+    return writeNewBlogEntry(req, res);
+});
+
+/**
+ * update or create a (new) blog entry
+ */
+app.put('/blog/entries/:id', (req, res) => {
+    const entryId = req.params.id;
+    if ( !entryId ) {
+        return writeNewBlogEntry(req, res);
+    } else {
+        // update existing blog entry
+    }
 });
 
 /**
