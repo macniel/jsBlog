@@ -1,11 +1,14 @@
 import * as Model from './models.js';
-
+import DataStorage from './data/mongodb.js';
+import App from './app.js';
 var app = require('express')();
 var ws = require('express-ws')(app);
 var bodyParser = require('body-parser');
 
 // parse application/json
 app.use(bodyParser.json());
+
+backendApp = new App();
 
 /**
  * translate the given tag from id to a name
@@ -21,20 +24,23 @@ app.post('/login', (req, res) => {
     } else {
         const username = req.body.username;
         const password = req.body.password;
-
-        // returns a jwt with userhash for further authentification
+        try {
+            res.send(backendApp.login(username, password)).end();
+        } catch ( e ) {
+            res.status(402).end();
+        }
     }
 });
 
 app.get('/logout', (req, res) => {
-
+    res.send(backendApp.logout()).end();
 });
 
 /**
  * get the blog with all references
  */
 app.get('/blog', (req, res) => {
-    res.send(blog).end();
+    res.send(backendApp.getBlog()).end();
 });
 
 /**
